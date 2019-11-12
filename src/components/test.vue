@@ -1,12 +1,15 @@
 <template>
   <div>
     <el-upload
-  class="upload-demo"
-  action="pro.wuhanzxc.com:8000/DocumentRunServer"
-  :on-change="handleChange"
-  :file-list="fileList3">
-  <el-button size="small" type="primary">点击上传</el-button>
-  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+      class="upload-demo"
+      :headers="header"
+      action="http://localhost:3000"
+      :on-change="handleChange"
+      :on-progress="handleProgress"
+      :on-success="aaa"
+      :on-preview="ccc"
+      :file-list="fileList3">
+    <el-button size="small" type="primary">点击上传</el-button>
 </el-upload>
   </div>
 </template>
@@ -15,20 +18,27 @@
 export default {
     data() {
       return {
-        fileList3: [{
-          name: 'food.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-          status: 'finished'
-        }, {
-          name: 'food2.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-          status: 'finished'
-        }]
-      };
+        fileList3: [],
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }
     },
     methods: {
-      handleChange(file, fileList) {
-        this.fileList3 = fileList.slice(-3);
+      handleChange (file, fileList) {
+        console.log('aaa')
+        console.log(fileList)
+        
+        this.fileList3 = fileList.slice(-3)
+      },
+      handleProgress (event, file, fileList) {
+        console.log(event)
+      },
+      aaa () {
+        console.log('成功啦')
+      },
+      ccc () {
+        console.log('点我干嘛？')
       }
     }
   }

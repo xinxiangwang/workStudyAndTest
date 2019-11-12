@@ -6,6 +6,12 @@ import 'element-ui/lib/theme-chalk/index.css'
 import App from './App'
 import { routes } from './router'
 import VueRouter from 'vue-router'
+import "babel-polyfill"
+
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 
 Vue.use(ElementUI)
 Vue.config.productionTip = false

@@ -1,6 +1,6 @@
 <script>
 /**
- * 发表页面
+ * 动态发表文章页面
  */
 export default {
   data() {

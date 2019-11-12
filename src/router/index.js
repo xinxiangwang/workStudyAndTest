@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
-
-let req = require.context('../components', true, /^((?!index).)*\.vue$/)
+/**根据components下内容生成路由 */
+let req = require.context('../components', false, /^((?!index).)*\.vue$/)
 console.log(req.keys())
 let routes = req.keys().map(fn => {
   fn = fn.replace('./', '/') // ./layout.vue --> /layout.vue
