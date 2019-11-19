@@ -54,14 +54,13 @@ export default {
     },
     methods: {
       allDays (days) {
-        console.log('aaa')
         let year = days.getFullYear()
-        let month = days.getMonth()+1
+        let month = days.getMonth() + 1
+        month = month < 10 ? '0' + month : month
         let lastDay = new Date(year,month,0) //Sat Nov 30 2019 00:00:00 GMT+0800 (中国标准时间)
         let lastDay_date = lastDay.getDate() //这个月的最后一天 30
         let firstDay = new Date(year,month-1,1) // Fri Nov 01 2019 00:00:00 GMT+0800 (中国标准时间)
         let firstDayOfWeek = firstDay.getDay() === 0 ? 7 : firstDay.getDay() //这个月第一天从周几开始 5
-        console.log(firstDayOfWeek)
         let pDay =new Date(year,month-1,0);
         let last_p_day =pDay.getDate(); // 获取上个月最后一天 31
 
@@ -76,7 +75,8 @@ export default {
         let curMonth = []
         for (let i = 1; i <= 42 - this.preMon.length; i++) {
           if (i <= lastDay_date) {
-            curMonth.push({ date: i, type: 'current' })
+            i = i< 10 ? '0' + i : i
+            curMonth.push({ date: year + '-' + month + '-' + i, type: 'current' })
           }
         }
         this.curMon = curMonth
