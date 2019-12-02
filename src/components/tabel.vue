@@ -1,6 +1,5 @@
 <template>
- <div>
-    <el-col :span="12">
+  <div>
     <div class="box" ref="box">
      
       <table ref='box1' border="1" :style="`position: absolute;${tableSize}`">
@@ -8,7 +7,12 @@
           <template v-for="(item, index) in tableData.head">
             <tr :key="index">
               <template v-for="(head, index) in item">
-                <th :key="index" :colspan="head.col" :rowspan="head.row">
+                <th v-if="head.val == 'time'" :key="index" :colspan="head.col" :rowspan="head.row">
+                  <slot name="time">
+                    <div>前年数据/本年数据</div>
+                  </slot>
+                </th>
+                <th v-else :key="index" :colspan="head.col" :rowspan="head.row">
                   {{ head.val }} <!--生成表头-->
                 </th>
               </template>
@@ -53,11 +57,12 @@
         </tbody>
       </table>
     </div>
-    </el-col>
   </div>
 </template>
 <script>
 import xmxxTdly from '../tableData2/xmxx_tdly'
+import zyjzTdly from '../tableData2/zyjz_tdly'
+import zyjzTrqs from '../tableData2/zyjz_trqs'
 import severeST from '../tableData2/severe_ST'
 import Zbfg from '../tableData2/zbfg'
 import Trqs from '../tableData/trqs'
@@ -92,12 +97,21 @@ export default {
     }
   },
   mounted () {
-    this.tableData = Sbcs()
+    this.tableData = zyjzTrqs()
     this.$refs.box.addEventListener('scroll', this.loadingMore, false);
   }
 }
 </script>
 <style scoped>
+.out{ 
+        border-top:60px #D6D3D6 solid;/*上边框宽度等于表格第一行行高*/ 
+        width:0px;/*让容器宽度为0*/ 
+        height:0px;/*让容器高度为0*/ 
+        border-left:180px #BDBABD solid;/*左边框宽度等于表格第一行第一格宽度*/ 
+        position:relative;/*让里面的两个子容器绝对定位*/ 
+    } 
+    .tr{font-style:normal;display:block;position:absolute;top:-45px;left:-60px;} 
+    .lb{font-style:normal;display:block;position:absolute;top:-25px;left:-140px;}
 .box {
   overflow: auto;
   width: 100%;
