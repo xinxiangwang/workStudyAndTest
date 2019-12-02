@@ -6,7 +6,16 @@ import 'element-ui/lib/theme-chalk/index.css'
 import App from './App'
 import { routes } from './router'
 import VueRouter from 'vue-router'
+import "babel-polyfill"
+import 'ant-design-vue/dist/antd.css'
+import { Calendar } from 'ant-design-vue'
+import '@/assets/iconfont/iconfont'
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+Vue.use(Calendar)
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 routes.unshift({

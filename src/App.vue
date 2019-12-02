@@ -130,4 +130,11 @@ textarea {
     *display: inline;
     *zoom: 1;
 }
+.icon {
+  width: 3em;
+  height: 3em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 </style>

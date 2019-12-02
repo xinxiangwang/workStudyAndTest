@@ -32,6 +32,9 @@
 </template>
 
 <script>
+/**
+ * 学习elementui
+ */
 export default {
   components: {},
   props: {},
